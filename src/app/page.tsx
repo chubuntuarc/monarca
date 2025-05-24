@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "@/components/Header";
 import ReportsTabs from "@/components/ReportsTabs";
 import ProjectionsFilter from "@/components/ProjectionsFilter";
