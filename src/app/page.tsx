@@ -18,6 +18,19 @@ export default function ReportsPage() {
           <ProjectedBreakdownTable />
         </div>
       </main>
+      <footer className="border-t border-gray-800 mt-12 py-6">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex justify-between items-center">
+            <div className="text-gray-400">
+              © 2025 arciniega.dev.
+            </div>
+            <div className="flex gap-6">
+              <a href="https://github.com/chubuntuarc/monarca/issues" className="text-gray-400 hover:text-white transition-colors">Report a bug</a>
+              <a href="https://arciniega.dev" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
