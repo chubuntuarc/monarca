@@ -1,3 +1,5 @@
+import { useTheme } from "./ThemeContext";
+
 const rows = [
   { month: "April 2024", income: "$5,500", expenses: "$4,000", savings: "$1,500", balance: "$1,500" },
   { month: "May 2024", income: "$5,500", expenses: "$4,200", savings: "$1,300", balance: "$2,800" },
@@ -8,9 +10,11 @@ const rows = [
 ];
 
 export default function ProjectedBreakdownTable() {
+  const { theme } = useTheme();
+
   return (
-    <div className="bg-[#18181b] rounded-lg p-6 border border-[#232323]">
-      <div className="font-bold mb-4 text-lg">Projected Breakdown</div>
+    <div className={`${theme === "dark" ? "bg-[#18181b] rounded-lg p-6 border border-[#232323]" : "bg-white rounded-lg p-6 border border-gray-300"}`}>
+      <div className={`${theme === "dark" ? "font-bold mb-4 text-lg text-white" : "font-bold mb-4 text-lg text-black"}`}>Projected Breakdown</div>
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="text-gray-400">
@@ -23,7 +27,7 @@ export default function ProjectedBreakdownTable() {
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.month} className="border-t border-[#232323]">
+            <tr key={row.month} className={`${theme === "dark" ? "border-t border-[#232323]" : "border-t border-gray-300"}`}>
               <td>{row.month}</td>
               <td>{row.income}</td>
               <td>{row.expenses}</td>
