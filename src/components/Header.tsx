@@ -48,7 +48,7 @@ export default function Header() {
   const { lang, setLang } = useLanguage();
 
   const toggleLang = () => {
-    setLang((prev) => (prev === 'es' ? 'en' : 'es'));
+    setLang(lang === 'es' ? 'en' : 'es');
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
