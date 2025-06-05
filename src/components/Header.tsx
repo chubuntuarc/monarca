@@ -67,7 +67,7 @@ export default function Header() {
           <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M3 6h14M3 12h14M3 18h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
         </button>
         <MonarcaLogo />
-        <span className="ml-1 font-semibold hidden sm:inline">{t.dashboard}</span>
+        <span className="ml-1 font-semibold hidden sm:inline">{t.reports}</span>
       </div>
       <nav className="gap-8 text-sm hidden md:flex">
         <a href="#" className="hover:underline">{t.dashboard}</a>

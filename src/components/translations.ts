@@ -17,6 +17,7 @@ const translations = {
     next_6_months: "Next 6 Months",
     projected_financials: "Projected Financials",
     percent_growth: "+15%",
+    edit_disclaimer: "You can modify the income and expenses values by double-clicking to calculate results in real time.",
   },
   es: {
     dashboard: "Inicio",
@@ -36,6 +37,7 @@ const translations = {
     next_6_months: "Próximos 6 meses",
     projected_financials: "Finanzas Proyectadas",
     percent_growth: "+15%",
+    edit_disclaimer: "Puedes modificar los valores de ingresos y gastos haciendo doble click para calcular los resultados en tiempo real.",
   },
 };
 

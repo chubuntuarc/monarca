@@ -109,6 +109,9 @@ export default function ProjectedBreakdownTable() {
           })}
         </tbody>
       </table>
+      <div className="text-xs text-gray-400 mt-2">
+        {t.edit_disclaimer}
+      </div>
     </div>
   );
 }
