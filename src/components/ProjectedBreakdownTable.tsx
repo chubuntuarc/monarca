@@ -1,4 +1,6 @@
 import { useTheme } from "./ThemeContext";
+import { useLanguage } from "./LanguageContext";
+import translations from "./translations";
 
 const rows = [
   { month: "April 2024", income: "$5,500", expenses: "$4,000", savings: "$1,500", balance: "$1,500" },
@@ -11,18 +13,20 @@ const rows = [
 
 export default function ProjectedBreakdownTable() {
   const { theme } = useTheme();
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   return (
     <div className={`${theme === "dark" ? "bg-[#18181b] rounded-lg p-6 border border-[#232323]" : "bg-white rounded-lg p-6 border border-gray-300"}`}>
-      <div className={`${theme === "dark" ? "font-bold mb-4 text-lg text-white" : "font-bold mb-4 text-lg text-black"}`}>Projected Breakdown</div>
+      <div className={`${theme === "dark" ? "font-bold mb-4 text-lg text-white" : "font-bold mb-4 text-lg text-black"}`}>{t.projected_breakdown}</div>
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="text-gray-400">
-            <th>Month</th>
-            <th>Projected Income</th>
-            <th>Projected Expenses</th>
-            <th>Net Savings</th>
-            <th>Carry-Over Balance</th>
+            <th>{t.month}</th>
+            <th>{t.projected_income}</th>
+            <th>{t.projected_expenses}</th>
+            <th>{t.net_savings}</th>
+            <th>{t.carry_over_balance}</th>
           </tr>
         </thead>
         <tbody>

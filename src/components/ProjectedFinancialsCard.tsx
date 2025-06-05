@@ -10,11 +10,15 @@ import {
   Filler,
 } from "chart.js";
 import { useTheme } from "./ThemeContext";
+import { useLanguage } from "./LanguageContext";
+import translations from "./translations";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Filler);
 
 export default function ProjectedFinancialsCard() {
   const { theme } = useTheme();
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   const data = {
     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep"],
@@ -52,10 +56,10 @@ export default function ProjectedFinancialsCard() {
   return (
     <div className={`${theme === "dark" ? "bg-[#18181b] rounded-lg p-6 mb-8 border border-[#232323]" : "bg-white rounded-lg p-6 mb-8 border border-gray-300"}`}>
       <div className="mb-4">
-        <div className="text-sm text-gray-300 mb-1">Projected Financials</div>
+        <div className="text-sm text-gray-300 mb-1">{t.projected_financials}</div>
         <div className="text-3xl font-bold">$15,000</div>
         <div className="text-gray-400">
-          Next 6 Months <span className="text-green-400">+15%</span>
+          {t.next_6_months} <span className="text-green-400">{t.percent_growth}</span>
         </div>
       </div>
       <div>

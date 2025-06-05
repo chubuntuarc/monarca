@@ -4,6 +4,8 @@ import MonarcaLogo from "./MonarcaLogo";
 import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeContext";
+import translations from "./translations";
+import { useLanguage } from "./LanguageContext";
 
 export default function Header() {
   const sunIcon = (
@@ -43,29 +45,91 @@ export default function Header() {
     setMounted(true);
   }, []);
 
+  const { lang, setLang } = useLanguage();
+
+  const toggleLang = () => {
+    setLang((prev) => (prev === 'es' ? 'en' : 'es'));
+  };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Traducciones para el header
+  const t = translations[lang];
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4" style={{background: "var(--background)", boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)"}}>
-      <div className="flex items-center gap-2">
+    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 md:px-6 py-3 md:py-4" style={{background: "var(--background)", boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)"}}>
+      <div className="flex items-center gap-2 flex-1">
+        <button
+          className="md:hidden text-xl"
+          aria-label="Abrir menú"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M3 6h14M3 12h14M3 18h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+        </button>
         <MonarcaLogo />
+        <span className="ml-1 font-semibold hidden sm:inline">{t.dashboard}</span>
       </div>
-      <nav className="flex gap-8 text-sm">
-        <a href="#" className="hover:underline">Dashboard</a>
-        <a href="#" className="hover:underline">Transactions</a>
-        <a href="#" className="hover:underline">Budgets</a>
-        <a href="#" className="font-semibold underline">Reports</a>
+      <nav className="gap-8 text-sm hidden md:flex">
+        <a href="#" className="hover:underline">{t.dashboard}</a>
+        <a href="#" className="hover:underline">{t.transactions}</a>
+        <a href="#" className="hover:underline">{t.budgets}</a>
+        <a href="#" className="font-semibold underline">{t.reports}</a>
       </nav>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
         {mounted && (
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle dark mode"
-            className={`text-xl focus:outline-none ${theme === "dark" ? "text-white" : "text-black"}`}
-          >
-            {theme === "dark" ? sunIcon : moonIcon}
-          </button>
+          <>
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className={`text-xl focus:outline-none ${theme === "dark" ? "text-white" : "text-black"}`}
+            >
+              {theme === "dark" ? sunIcon : moonIcon}
+            </button>
+            <button
+              onClick={toggleLang}
+              aria-label="Cambiar idioma"
+              className={`ml-1 px-1 py-0.5 rounded-sm text-[10px] border ${theme === "dark" ? "text-white border-white" : "text-black border-black"}`}
+            >
+              {lang === 'es' ? 'ES' : 'EN'}
+            </button>
+          </>
         )}
         <div className="w-8 h-8 rounded-full bg-gray-400 overflow-hidden">
           <Image src="/arc_favicon.png" alt="User" width={32} height={32} />
+        </div>
+      </div>
+      {/* Overlay y menú móvil animados */}
+      <div
+        className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto bg-black/40' : 'opacity-0 pointer-events-none bg-black/0'}`}
+        onClick={() => setMenuOpen(false)}
+      >
+        <div
+          className={`absolute top-0 left-0 w-56 h-full bg-[var(--background)] shadow-lg flex flex-col p-6 gap-4 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          onClick={e => e.stopPropagation()}
+        >
+          <button className="self-start mb-4" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú">
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg>
+          </button>
+          <a href="#" className="py-2 hover:underline">{t.dashboard}</a>
+          <a href="#" className="py-2 hover:underline">{t.transactions}</a>
+          <a href="#" className="py-2 hover:underline">{t.budgets}</a>
+          <a href="#" className="py-2 font-semibold underline">{t.reports}</a>
+          <div className="flex gap-2 mt-4">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className={`text-xl focus:outline-none ${theme === "dark" ? "text-white" : "text-black"}`}
+            >
+              {theme === "dark" ? sunIcon : moonIcon}
+            </button>
+            <button
+              onClick={toggleLang}
+              aria-label="Cambiar idioma"
+              className={`px-1 py-0.5 rounded-sm text-[10px] border ${theme === "dark" ? "text-white border-white" : "text-black border-black"}`}
+            >
+              {lang === 'es' ? 'ES' : 'EN'}
+            </button>
+          </div>
         </div>
       </div>
     </header>

@@ -5,17 +5,21 @@ import ProjectionsFilter from "@/components/ProjectionsFilter";
 import ProjectedFinancialsCard from "@/components/ProjectedFinancialsCard";
 import ProjectedBreakdownTable from "@/components/ProjectedBreakdownTable";
 import { useTheme } from "@/components/ThemeContext";
+import translations from "@/components/translations";
+import { useLanguage } from "@/components/LanguageContext";
 
 export default function ReportsPage() {
   const { theme } = useTheme();
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   return (
     <>
       <div className={`min-h-screen pt-16 ${theme === "dark" ? "bg-[#111]" : "bg-white"}`}>
         <Header />
         <main className="max-w-5xl mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold mb-2">Reports</h1>
-          <p className="text-gray-400 mb-6">Analyze your financial activities over time</p>
+          <h1 className="text-3xl font-bold mb-2">{t.reports_title}</h1>
+          <p className="text-gray-400 mb-6">{t.reports_subtitle}</p>
           <ReportsTabs />
           <div className="mt-6">
             <ProjectionsFilter />
