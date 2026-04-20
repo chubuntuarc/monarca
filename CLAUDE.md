@@ -17,7 +17,7 @@ Eventualmente multi-tenant como producto comercial ("tu contador personal en Cla
 - **MCP**: `@modelcontextprotocol/sdk` + adapter Vercel (mismo patrón que Ephective y Black Tiger CRM)
 - **Testing**: Vitest para unit + integration. Supabase local vía Docker para integration tests.
 - **Linting**: Biome (preferido por velocidad)
-- **Package manager**: pnpm
+- **Package manager**: bun
 - **Deploy**: Vercel
 - **Migrations**: Supabase CLI (`supabase/migrations/*.sql`)
 
@@ -157,29 +157,29 @@ Usar estos subagentes para tareas específicas:
 
 ```bash
 # Desarrollo
-pnpm dev                         # Next.js en modo dev
-pnpm test                        # Vitest en watch mode
-pnpm test:run                    # Vitest single run (para CI)
-pnpm test:coverage               # Con cobertura
+bun dev                          # Next.js en modo dev
+bun test                         # Vitest en watch mode
+bun test:run                     # Vitest single run (para CI)
+bun test:coverage                # Con cobertura
 
 # Base de datos
-pnpm db:start                    # Levanta Supabase local (Docker)
-pnpm db:reset                    # Reset schema + seed
-pnpm db:seed                     # Solo seed
-pnpm db:types                    # Regenera types de TS desde schema
-pnpm db:migration:new <nombre>   # Nueva migration
-pnpm db:migration:up             # Aplica migrations pendientes
+bun db:start                     # Levanta Supabase local (Docker)
+bun db:reset                     # Reset schema + seed
+bun db:seed                      # Solo seed
+bun db:types                     # Regenera types de TS desde schema
+bun db:migration:new <nombre>    # Nueva migration
+bun db:migration:up              # Aplica migrations pendientes
 
 # Scripts
-pnpm import:sheets               # Importa del Sheet actual
-pnpm import:sheets -- --dry-run  # Sin escribir a DB
+bun import:sheets                # Importa del Sheet actual
+bun import:sheets -- --dry-run   # Sin escribir a DB
 
 # Lint y format
-pnpm lint                        # Biome check
-pnpm format                      # Biome format
+bun lint                         # Biome check
+bun format                       # Biome format
 
 # Deploy
-pnpm build                       # Build de producción
+bun run build                    # Build de producción
 # Deploy automático vía git push a main (Vercel)
 ```
 
@@ -203,7 +203,7 @@ Estas decisiones fueron pensadas y descartar alternativas. No cuestionarlas sin 
 - ✅ Single endpoint `/api/mcp/route.ts`
 - ✅ Vitest (no Jest, no Playwright para unit)
 - ✅ Biome (no ESLint + Prettier)
-- ✅ pnpm (no npm, no yarn)
+- ✅ bun (no pnpm, no npm, no yarn)
 - ✅ Modelo de transacciones: double-entry ligero con source/destination
 - ✅ Categorías como árbol (parent_id)
 - ✅ Snapshots mensuales materializados (no calcular en vivo cada vez)
